@@ -2,26 +2,41 @@ import Lead from '../../models/Lead.js';
 
 export default async function handler(req, res) {
     try {
+        // Extract the Authorization header
         const authHeader = req.headers['authorization'];
-        const token = authHeader && authHeader.split(' ')[1];
+        console.log('Authorization Header:', authHeader);
 
-        if (token !== process.env.CRON_SECRET) {
-            return res.status(401).json({ error: 'Unauthorized' });
+        if (!authHeader) {
+            return res.status(401).json({ error: 'Authorization header is missing' });
         }
 
-        if (req.method === 'POST') {
-            // Fetch all leads with 'Pending' status
-            const pendingLeads = await Lead.findAll({ where: { status: 'Pending' } });
+        // Extract and verify the token
+        const token = authHeader.split(' ')[1];
+        if (!token || token !== process.env.CRON_SECRET) {
+            return res.status(401).json({ error: 'Unauthorized access' });
+        }
 
-            if (pendingLeads.length === 0) {
-                console.log('No pending leads found.');
-                return res.status(200).json({ message: 'No pending leads found.', condition: true });
-            }
+        if (req.method !== 'POST') {
+            return res.status(405).json({ error: 'Method Not Allowed' });
+        }
 
-            const success = Math.random() > 0.5; // Simulate success/failure
+        // Fetch leads with 'Pending' status
+        const pendingLeads = await Lead.findAll({ where: { status: 'Pending' } });
 
-            if (success) {
-                // Bulk update all leads to "Appointment Booked"
+        if (!pendingLeads || pendingLeads.length === 0) {
+            console.log('No pending leads found.');
+            return res.status(200).json({
+                message: 'No pending leads found.',
+                condition: true
+            });
+        }
+
+        // Simulate success/failure
+        const success = Math.random() > 0.5;
+
+        if (success) {
+            try {
+                // Bulk update leads to "Appointment Booked"
                 await Lead.update(
                     { status: "Appointment Booked" },
                     { where: { status: 'Pending' } }
@@ -33,16 +48,22 @@ export default async function handler(req, res) {
                     condition: true,
                     updatedLeads: pendingLeads.length
                 });
+            } catch (updateError) {
+                console.error('Error updating leads:', updateError.message);
+                return res.status(500).json({
+                    error: 'Failed to update leads',
+                    details: updateError.message
+                });
             }
-
-            return res.status(500).json({ message: 'Call failed', condition: false });
+        } else {
+            console.log('Simulated failure occurred.');
+            return res.status(500).json({
+                message: 'Call failed',
+                condition: false
+            });
         }
-
-        return res.status(405).json({ error: 'Method Not Allowed' });
-
     } catch (error) {
         console.error('Error in Call API:', error.message);
-
         return res.status(500).json({
             error: 'Something went wrong',
             details: error.message
