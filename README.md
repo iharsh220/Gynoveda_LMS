@@ -73,11 +73,11 @@ This API triggers a random true or false response. It is used to set up a cron j
 
 Ensure the following environment variables are set in a .env file at the root of the project:
 
-```DB_NAME=<your_database_name>
-DB_USER=<your_database_username>
-DB_PASSWORD=<your_database_password>
-DB_HOST=<your_database_hosturl>
-HOST_URL=http://localhost:3000```
+```DB_NAME=<your_database_name>```
+```DB_USER=<your_database_username>```
+```DB_PASSWORD=<your_database_password>```
+```DB_HOST=<your_database_hosturl>```
+```HOST_URL=http://localhost:3000```
 
 ## Live Testing URL
 
@@ -89,4 +89,3 @@ Test the project live at:
 Ensure the required environment variables (if any) are correctly set up before running the project.
 
 For production deployment, additional configurations may be required.
-
