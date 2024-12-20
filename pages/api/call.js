@@ -2,14 +2,14 @@ import Lead from '../../models/Lead.js';
 
 export default async function handler(req, res) {
     try {
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
 
-
-        if (req.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
-            return res.status(401).end('Unauthorized');
+        if (token !== process.env.CRON_SECRET) {
+            return res.status(401).json({ error: 'Unauthorized' });
         }
 
         if (req.method === 'POST') {
-            
             // Fetch all leads with 'Pending' status
             const pendingLeads = await Lead.findAll({ where: { status: 'Pending' } });
 
@@ -18,31 +18,31 @@ export default async function handler(req, res) {
                 return res.status(200).json({ message: 'No pending leads found.', condition: true });
             }
 
-            const success = Math.random() > 0.5; // Random success/failure
+            const success = Math.random() > 0.5; // Simulate success/failure
 
             if (success) {
-                // Iterate through each lead and trigger the Call API
-                for (const lead of pendingLeads) {
+                // Bulk update all leads to "Appointment Booked"
+                await Lead.update(
+                    { status: "Appointment Booked" },
+                    { where: { status: 'Pending' } }
+                );
 
-                    lead.status = "Appointment Booked";
-
-                    // Save the updated lead status
-                    await lead.save();
-
-                    console.log(`Lead ${lead.id} status updated to ${lead.status}`);
-                }
-
-                return res.status(200).json({ message: 'Call successful', condition: true });
+                console.log(`${pendingLeads.length} leads updated to Appointment Booked.`);
+                return res.status(200).json({
+                    message: 'Call successful',
+                    condition: true,
+                    updatedLeads: pendingLeads.length
+                });
             }
-            return res.status(200).json({ message: 'Call failed', condition: false });
+
+            return res.status(500).json({ message: 'Call failed', condition: false });
         }
+
         return res.status(405).json({ error: 'Method Not Allowed' });
 
     } catch (error) {
-        // Log the error for debugging purposes
         console.error('Error in Call API:', error.message);
 
-        // Return a generic error message to the client
         return res.status(500).json({
             error: 'Something went wrong',
             details: error.message
