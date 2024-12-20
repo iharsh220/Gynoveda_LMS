@@ -15,21 +15,29 @@ npm (Node Package Manager)
 
 Clone the repository to your local machine.
 
-```git clone https://github.com/iharsh220/Gynoveda_LMS.git```
+```bash
+    git clone https://github.com/iharsh220/Gynoveda_LMS.git
+```
 
 Navigate to the project directory.
 
-```cd Gynoveda_LMS```
+```bash
+cd Gynoveda_LMS
+```
 
 Install the required packages with the following command (use --force if necessary):
 
-```npm install --force```
+```bash
+npm install --force
+```
 
 ## Running the Project
 
 Start the development server with:
 
-```npm run dev```
+```bash
+    npm run dev
+```
 
 The project will run at `http://localhost:3000` by default.
 
@@ -39,25 +47,33 @@ The project will run at `http://localhost:3000` by default.
 
 Get all leads
 
-```GET /api/leads```
+```bash
+    GET /api/leads
+```
 
 Retrieves all lead data.
 
 Store lead data
 
-```POST /api/leads```
+```bash
+    POST /api/leads
+```
 
 Stores new lead data.
 
 Fetch lead by ID
 
-```GET /api/leads/:id```
+```bash
+GET /api/leads/:id
+```
 
 Retrieves lead data by ID.
 
 Update lead by ID
 
-```PUT /api/leads/:id```
+```bash
+PUT /api/leads/:id
+```
 
 Updates lead data by ID.
 
@@ -65,7 +81,9 @@ Updates lead data by ID.
 
 Trigger random outcome
 
-```POST /api/call```
+```bash
+POST /api/call
+```
 
 This API triggers a random true or false response. It is used to set up a cron job in Vercel and update user data status from "Pending" to "Appointment Booked."
 
@@ -73,11 +91,13 @@ This API triggers a random true or false response. It is used to set up a cron j
 
 Ensure the following environment variables are set in a .env file at the root of the project:
 
-```DB_NAME=<your_database_name>```
-```DB_USER=<your_database_username>```
-```DB_PASSWORD=<your_database_password>```
-```DB_HOST=<your_database_hosturl>```
-```HOST_URL=http://localhost:3000```
+```bash
+DB_NAME=<your_database_name>
+DB_USER=<your_database_username>
+DB_PASSWORD=<your_database_password>
+DB_HOST=<your_database_hosturl>
+HOST_URL=http://localhost:3000
+```
 
 ## Live Testing URL
 
