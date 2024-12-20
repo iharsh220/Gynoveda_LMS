@@ -3,12 +3,13 @@ import Lead from '../../models/Lead.js';
 export default async function handler(req, res) {
     try {
 
+
+        if (req.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
+            return res.status(401).end('Unauthorized');
+        }
+
         if (req.method === 'POST') {
-
-            if (req.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
-                return res.status(401).end('Unauthorized');
-            }
-
+            
             // Fetch all leads with 'Pending' status
             const pendingLeads = await Lead.findAll({ where: { status: 'Pending' } });
 
