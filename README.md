@@ -102,7 +102,7 @@ HOST_URL=http://localhost:3000
 ## Live Testing URL
 
 Test the project live at:
-[Next.js deployment documentation](https://gynoveda-lms-hnmj-pf9ixyqlq-hgohil220-gmailcoms-projects.vercel.app)
+[Gynoveda_LMS](https://gynoveda-lms-hnmj-pf9ixyqlq-hgohil220-gmailcoms-projects.vercel.app)
 
 ## Notes
 
