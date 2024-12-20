@@ -1,40 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
-## Getting Started
+## Next.js Project: Lead Management System
 
-First, run the development server:
+This project is built using Next.js for both frontend and backend development. It provides functionalities to manage lead data and demonstrates API usage, including a dummy API for testing purposes.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Before running the project, ensure you have the following installed on your system:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Node.js (v14 or later)
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+npm (Node Package Manager)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Clone the repository to your local machine.
 
-## Learn More
+```git clone https://github.com/iharsh220/Gynoveda_LMS.git```
 
-To learn more about Next.js, take a look at the following resources:
+Navigate to the project directory.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+```cd Gynoveda_LMS```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Install the required packages with the following command (use --force if necessary):
 
-## Deploy on Vercel
+```npm install --force```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Running the Project
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Start the development server with:
+
+```npm run dev```
+
+The project will run at `http://localhost:3000` by default.
+
+## API Endpoints
+
+## Leads Management
+
+Get all leads
+
+```GET /api/leads```
+
+Retrieves all lead data.
+
+Store lead data
+
+```POST /api/leads```
+
+Stores new lead data.
+
+Fetch lead by ID
+
+```GET /api/leads/:id```
+
+Retrieves lead data by ID.
+
+Update lead by ID
+
+```PUT /api/leads/:id```
+
+Updates lead data by ID.
+
+## Dummy API for Testing
+
+Trigger random outcome
+
+```POST /api/call```
+
+This API triggers a random true or false response. It is used to set up a cron job in Vercel and update user data status from "Pending" to "Appointment Booked."
+
+## Environment Variables
+
+Ensure the following environment variables are set in a .env file at the root of the project:
+
+```DB_NAME=<your_database_name>
+DB_USER=<your_database_username>
+DB_PASSWORD=<your_database_password>
+DB_HOST=<your_database_hosturl>
+HOST_URL=http://localhost:3000```
+
+## Live Testing URL
+
+Test the project live at:
+[Next.js deployment documentation](https://gynoveda-lms-hnmj-pf9ixyqlq-hgohil220-gmailcoms-projects.vercel.app)
+
+## Notes
+
+Ensure the required environment variables (if any) are correctly set up before running the project.
+
+For production deployment, additional configurations may be required.
+
