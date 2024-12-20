@@ -16,7 +16,7 @@ npm (Node Package Manager)
 Clone the repository to your local machine.
 
 ```bash
-    git clone https://github.com/iharsh220/Gynoveda_LMS.git
+git clone https://github.com/iharsh220/Gynoveda_LMS.git
 ```
 
 Navigate to the project directory.
@@ -36,7 +36,7 @@ npm install --force
 Start the development server with:
 
 ```bash
-    npm run dev
+npm run dev
 ```
 
 The project will run at `http://localhost:3000` by default.
@@ -48,7 +48,7 @@ The project will run at `http://localhost:3000` by default.
 Get all leads
 
 ```bash
-    GET /api/leads
+GET /api/leads
 ```
 
 Retrieves all lead data.
@@ -56,7 +56,7 @@ Retrieves all lead data.
 Store lead data
 
 ```bash
-    POST /api/leads
+POST /api/leads
 ```
 
 Stores new lead data.
